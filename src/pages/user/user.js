@@ -1,16 +1,36 @@
-import Taro, {  useState } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
+import {connect} from '@tarojs/redux'
 import { View, Text } from '@tarojs/components'
 import './user.scss'
+@connect(({ user }) => ({
+  user
+}))
+export default class User extends Component{
+	componentWillMount () { }
 
-function User(){
-	const [userName ,setUserName] = useState('个人中心')
- return (
-	 <View>
-		  <Text>{userName}</Text>
-	 </View>
- )
+  componentDidMount () {
+		const { dispatch } = this.props;
+		dispatch({
+			type: 'user/getList'
+		})
+	 }
+
+  componentWillUnmount () { }
+
+  componentDidShow () { }
+
+	componentDidHide () { }
+
+	config = {
+		navigationBarTitleText: '个人中心'
+	}
+	
+	render(){
+		return (
+			<View>
+				 <Text>个人中心</Text>
+			</View>
+		)
+	}
 }
-User.config = {
-	navigationBarTitleText: '个人中心'
-}
-export default User;
+
