@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtButton , AtGrid } from 'taro-ui';
-import DocsHeader from '../../components/doc-header'
+import { View  , Text } from '@tarojs/components'
+import { AtButton , AtGrid, AtActionSheet ,AtActionSheetItem } from 'taro-ui';
+import Feed from '../../components/feed/feed.js'
 import './index.scss'
 
 export default class Index extends Component {
@@ -18,7 +18,6 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: '首页'
   }
-
 
   render () {
     const data = [
@@ -49,7 +48,6 @@ export default class Index extends Component {
     ]
     return (
       <View className='page'>
-       <DocsHeader title='基础' desc='1 个组件'></DocsHeader>
        <View className='panel__content'>
             <View className='btn-item'>
                       <AtButton type='primary'>主操作按钮</AtButton>
@@ -60,6 +58,16 @@ export default class Index extends Component {
         </View>
         <View className='panel__content'>
           <AtGrid  mode='rect' data={data} />
+        </View>
+        <View>
+          <Text>动作面板</Text>
+          <AtActionSheet title='标题' >
+             <AtActionSheetItem>按钮一</AtActionSheetItem>
+             <AtActionSheetItem>按钮二</AtActionSheetItem>
+          </AtActionSheet>
+        </View>
+        <View>
+          <Feed></Feed>
         </View>
       </View>
     )
