@@ -12,7 +12,11 @@ export default class User extends Component{
   componentDidMount () {
 		const { dispatch } = this.props;
 		dispatch({
-			type: 'user/getList'
+			type: 'user/getList',
+			params: { id: 1 },
+			callback: res => {
+				console.log(res)
+			}
 		});
 	 }
 
@@ -28,11 +32,11 @@ export default class User extends Component{
 	
 	render(){
 		const userInfos = Taro.getStorageInfoSync("userInfo")
-		console.log(userInfos)
+	//	console.log(userInfos)
 		Taro.getStorage({
 			key: 'userInfo',
 			success: res => {
-			  console.log(res)
+			 // console.log(res)
 			}
 		})
 		return (

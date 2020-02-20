@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import request from "../utils/request";
+import { list } from '../service/api'
 
 export default {
 	namespace: 'user',
@@ -7,8 +7,10 @@ export default {
 		list: []
 	},
 	effects: {
-	  *getList({},{}){
-      console.log("user model......")
+	  *getList({ params , callback  },{ call , put }){
+			// call 执行异步函数
+			const data = yield call(list,{});
+			console.log(data)
 		},
 	},
 	reducers: {
