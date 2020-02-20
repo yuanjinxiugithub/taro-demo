@@ -21,7 +21,49 @@ const store = dvaApp.getStore();
 
 class App extends Component {
 
-  componentDidMount () {}
+  componentDidMount () {
+    const DEV = Taro.getEnv();
+    console.log(DEV)
+    if(DEV === "WEAPP"){
+      console.log("当前环境是微信小程序");
+   
+      Taro.checkSession({
+        success: res => {
+          //session_key 未过期，并且在本生命周期一直有效
+          console.log(res)
+        },
+        fail: res => {
+           //sessIon_key 已经失效，需要重新执行登录流程
+          console.log(res)
+          //需要重新登录
+             //调用接口获取登录凭证。通过凭证进而换取用户登录态信息。包括用户的唯一openid以及本次登录的会话密钥
+        Taro.login({
+        success:(res2) => {
+         console.log(res2) 
+         //调用后端登录接口获取openid
+        },
+        fail:(fialMsg) => {
+          console.log(fialMsg)
+        }
+      });
+        }
+      });
+      Taro.getSetting({
+        success: res => {
+          console.log(res)
+        },
+      });
+      //获取微信用户信息
+      Taro.getUserInfo({
+      }).then(res => {
+        console.log(res);
+        Taro.setStorage({
+          key: 'userInfo',
+          data: res.userInfo
+        });
+      })
+    }
+  }
 
   componentDidShow () {}
 

@@ -2,9 +2,13 @@ import Taro, { Component } from '@tarojs/taro'
 import { View  , Text } from '@tarojs/components'
 import { AtButton , AtGrid, AtActionSheet ,AtActionSheetItem } from 'taro-ui';
 import Feed from '../../components/feed/feed.js'
+import DocsHeader from '../../components/title/title.js'
 import './index.scss'
 
 export default class Index extends Component {
+  state = {
+    opend: false
+  }
   componentWillMount () { }
 
   componentDidMount () { }
@@ -19,7 +23,14 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
+  clickAtActionSheet = () => {
+    this.setState({
+      opend: true
+    });
+  }
+
   render () {
+    const { opend } = this.state
     const data = [
       {
         image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
@@ -48,11 +59,13 @@ export default class Index extends Component {
     ]
     return (
       <View className='page'>
+       <DocsHeader title='基础' desc='1 个组件'></DocsHeader>
        <View className='panel__content'>
             <View className='btn-item'>
                       <AtButton type='primary'>主操作按钮</AtButton>
              </View>
          </View>
+       <DocsHeader title='Grid珊格' desc='AtGrid'></DocsHeader> 
        <View className='panel__content'>
           <AtGrid data={data} />
         </View>
@@ -60,8 +73,9 @@ export default class Index extends Component {
           <AtGrid  mode='rect' data={data} />
         </View>
         <View>
-          <Text>动作面板</Text>
-          <AtActionSheet title='标题' >
+        <DocsHeader title='动作面板' desc=''></DocsHeader> 
+          <AtButton onClick={this.clickAtActionSheet}>点击</AtButton>
+          <AtActionSheet title='标题' isOpened={opend}>
              <AtActionSheetItem>按钮一</AtActionSheetItem>
              <AtActionSheetItem>按钮二</AtActionSheetItem>
           </AtActionSheet>

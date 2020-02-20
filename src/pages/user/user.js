@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import {connect} from '@tarojs/redux'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import { AtAvatar } from 'taro-ui'
 import './user.scss'
 @connect(({ user }) => ({
   user
@@ -12,7 +13,7 @@ export default class User extends Component{
 		const { dispatch } = this.props;
 		dispatch({
 			type: 'user/getList'
-		})
+		});
 	 }
 
   componentWillUnmount () { }
@@ -26,9 +27,21 @@ export default class User extends Component{
 	}
 	
 	render(){
+		const userInfos = Taro.getStorageInfoSync("userInfo")
+		console.log(userInfos)
+		Taro.getStorage({
+			key: 'userInfo',
+			success: res => {
+			  console.log(res)
+			}
+		})
 		return (
 			<View>
-				 <Text>个人中心</Text>
+				<View>
+					{userInfos &&
+	         <AtAvatar image={userInfos.avatarUrl}></AtAvatar>
+					}
+				</View>
 			</View>
 		)
 	}
