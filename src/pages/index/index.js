@@ -1,13 +1,15 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View  , Text } from '@tarojs/components'
-import { AtButton , AtGrid, AtActionSheet ,AtActionSheetItem } from 'taro-ui';
+import { AtButton , AtGrid, AtActionSheet , AtActionSheetItem, AtRadio , AtCheckbox } from 'taro-ui';
 import Feed from '../../components/feed/feed.js'
 import DocsHeader from '../../components/title/title.js'
 import './index.scss'
 
 export default class Index extends Component {
   state = {
-    opend: false
+    opend: false,
+    selectRadio: '',
+    checkboxList: [],
   }
   componentWillMount () { }
 
@@ -27,6 +29,18 @@ export default class Index extends Component {
     this.setState({
       opend: true
     });
+  }
+
+  handleChange = (val) => {
+     this.setState({
+       selectRadio: val
+     })
+  }
+
+  handleChangeCheckBox = (val) => {
+    this.setState({
+      checkboxList: val
+    })
   }
 
   render () {
@@ -57,6 +71,30 @@ export default class Index extends Component {
         value: '手机馆'
       }
     ]
+    const radioOptions = [
+      { label: '单选项一', value: 'option1', desc: '单选项描述' },
+      { label: '单选项二', value: 'option2' },
+      { label: '单选项三禁用', value: 'option3', desc: '单选项描述', disabled: true }
+    ]
+    const checkOptions =  [{
+      value: 'list1',
+      label: 'iPhone X',
+      desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。'
+    },{
+      value: 'list2',
+      label: 'HUAWEI P20'
+    },{
+      value: 'list3',
+      label: 'OPPO Find X',
+      desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。',
+      disabled: true
+    },{
+      value: 'list4',
+      label: 'vivo NEX',
+      desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。',
+      disabled: true
+  }]
+    const { selectRadio , checkboxList } = this.state
     return (
       <View className='page'>
        <DocsHeader title='基础' desc='1 个组件'></DocsHeader>
@@ -82,6 +120,21 @@ export default class Index extends Component {
         </View>
         <View>
           <Feed></Feed>
+        </View>
+        <DocsHeader title='数据录入' desc='12个组件'></DocsHeader>
+        {/* Radio */}
+        <View className='doc-body'>
+           <View className='panel'>
+               <View>
+                 <AtRadio options={radioOptions} value={selectRadio} onClick={this.handleChange.bind(this)}></AtRadio>
+               </View>
+           </View>
+        </View>
+        {/* Checkbox */}
+        <View>
+           <AtCheckbox options={checkOptions}  selectedList={checkboxList} onChange={this.handleChangeCheckBox.bind(this)}>
+
+           </AtCheckbox>
         </View>
       </View>
     )

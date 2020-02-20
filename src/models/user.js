@@ -9,8 +9,8 @@ export default {
 	effects: {
 	  *getList({ params , callback  },{ call , put }){
 			// call 执行异步函数
-			const data = yield call(list,{});
-			console.log(data)
+		//	const data = yield call(list,{});
+			//console.log(data)
 		},
 	},
 	reducers: {

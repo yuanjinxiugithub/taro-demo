@@ -33,12 +33,12 @@ export default class User extends Component{
 	render(){
 		const userInfos = Taro.getStorageInfoSync("userInfo")
 	//	console.log(userInfos)
-		Taro.getStorage({
-			key: 'userInfo',
-			success: res => {
-			 // console.log(res)
-			}
-		})
+		// Taro.getStorage({
+		// 	key: 'userInfo',
+		// 	success: res => {
+		// 	 // console.log(res)
+		// 	}
+		// })
 		return (
 			<View>
 				<View>

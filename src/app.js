@@ -24,9 +24,9 @@ class App extends Component {
   componentDidMount () {
     const DEV = Taro.getEnv();
     console.log(DEV)
-    if(DEV === "WEAPP"){
+    console.log(Taro.ENV_TYPE.WEAPP)
+    if(DEV === Taro.ENV_TYPE.WEAPP){
       console.log("当前环境是微信小程序");
-   
       Taro.checkSession({
         success: res => {
           //session_key 未过期，并且在本生命周期一直有效
