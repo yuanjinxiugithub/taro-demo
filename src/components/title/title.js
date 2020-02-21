@@ -7,7 +7,7 @@ import './title.scss'
 export default class DocsHeader extends Component {
   render () {
     const { title, desc } = this.props
-
+    
     return (
       <View className='doc-header'>
         <View className='doc-header__title'>{title}</View>

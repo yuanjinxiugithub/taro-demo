@@ -7,8 +7,8 @@
     "prefer-rest-params": "off",
     "arrow-body-style": "warn",
     "taro/custom-component-children": "off",
-    "jsx-quotes": ["error", "prefer-single"],
-    "eqeqeq": "off"
+    "eqeqeq": "off",
+    "radix": "off"
   },
   "parser": "babel-eslint"
   }

@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View  , Text } from '@tarojs/components'
-import { AtButton , AtGrid, AtActionSheet , AtActionSheetItem, AtRadio , AtCheckbox } from 'taro-ui';
+import { AtButton , AtGrid, AtActionSheet , AtActionSheetItem, AtRadio , AtCheckbox , AtInputNumber } from 'taro-ui';
 import Feed from '../../components/feed/feed.js'
 import DocsHeader from '../../components/title/title.js'
 import './index.scss'
@@ -10,6 +10,7 @@ export default class Index extends Component {
     opend: false,
     selectRadio: '',
     checkboxList: [],
+    inputNumber: 0,
   }
   componentWillMount () { }
 
@@ -32,15 +33,21 @@ export default class Index extends Component {
   }
 
   handleChange = (val) => {
-     this.setState({
-       selectRadio: val
-     })
+    this.setState({
+      selectRadio: val
+    });
   }
 
   handleChangeCheckBox = (val) => {
     this.setState({
       checkboxList: val
-    })
+    });
+  }
+
+  handleChangeInput = (val) => {
+    this.setState({
+      inputNumber: val
+    });
   }
 
   render () {
@@ -94,14 +101,14 @@ export default class Index extends Component {
       desc: '部分地区提供电子普通发票，用户可自行打印，效力等同纸质普通发票，具体以实际出具的发票类型为准。',
       disabled: true
   }]
-    const { selectRadio , checkboxList } = this.state
+    const { selectRadio , checkboxList , inputNumber } = this.state
     return (
       <View className='page'>
        <DocsHeader title='基础' desc='1 个组件'></DocsHeader>
        <View className='panel__content'>
-            <View className='btn-item'>
-                      <AtButton type='primary'>主操作按钮</AtButton>
-             </View>
+          <View className='btn-item'>
+            <AtButton type='primary'>主操作按钮</AtButton>
+            </View>
          </View>
        <DocsHeader title='Grid珊格' desc='AtGrid'></DocsHeader> 
        <View className='panel__content'>
@@ -133,9 +140,23 @@ export default class Index extends Component {
         {/* Checkbox */}
         <View>
            <AtCheckbox options={checkOptions}  selectedList={checkboxList} onChange={this.handleChangeCheckBox.bind(this)}>
-
            </AtCheckbox>
         </View>
+        {/* InputNumber */}
+        <View>
+        <View className='panel'>
+             <View>
+               <AtInputNumber
+                 min={0}
+                 max={10}
+                 step={1}
+                 value={inputNumber}
+                 onChange={this.handleChangeInput.bind(this)}
+               />
+              </View>
+           </View>
+        </View>
+        
       </View>
     )
   }

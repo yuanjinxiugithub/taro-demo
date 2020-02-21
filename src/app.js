@@ -74,7 +74,8 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
-      'pages/user/user'
+      'pages/user/user',
+      'pages/hooks/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -96,6 +97,12 @@ class App extends Component {
           iconPath: './assets/tab/user.png',
           selectedIconPath: './assets/tab/user-active.png',
         },
+        {
+          pagePath: 'pages/hooks/index',
+          text: 'Hooks',
+          iconPath: './assets/tab/user.png',
+          selectedIconPath: './assets/tab/user-active.png',
+        }
       ],
       color: '#333',
       selectedColor: '#333',
